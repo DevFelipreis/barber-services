@@ -1,4 +1,4 @@
-# Meu Money - aplicativo de gerenciamento de despesas.
+# Barber Services - Gerenciamento de fila de uma Barbearia.
 
 Este projeto é um repositório para uma API de um Sitema de gerenciamento de despesas domésticas. Essa API integra-se com o servidor para permitir o acesso e manipulação de dados de forma segura e eficiente.
 
