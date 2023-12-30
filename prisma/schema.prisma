@@ -25,6 +25,18 @@ model Queue {
   data DateTime @db.Date() @default(now())
   expert Expert @relation(fields: [expertId], references: [id])
   expertId String
+  queuecustomers QueueCustomer []
 
   @@map("queues")
+}
+
+model QueueCustomer{
+id Int @id @default(autoincrement())
+queue Queue @relation(fields: [queueId], references: [id])
+queueId String    
+name String
+service String
+isWaiting Boolean @default(true)
+
+  @@map("queue_customers")
 }
