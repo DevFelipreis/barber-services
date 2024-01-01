@@ -18,4 +18,8 @@ export class ExpertsService {
 	async createExpert(data: CreateExpertsDto) {
 		return await this.prisma.expert.create({ data });
 	}
+
+	async findAllExperts() {
+		return await this.prisma.expert.findMany();
+	}
 }
