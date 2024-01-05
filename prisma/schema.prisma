@@ -10,33 +10,33 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Expert{
-  id String @id @default(uuid())
-  name String
+model Expert {
+  id    String  @id @default(uuid())
+  name  String
   email String  @unique
-  phone String ?
-  queue Queue []
+  phone String?
+  queue Queue[]
 
   @@map("experts")
 }
 
 model Queue {
-  id String @id @default(uuid())
-  data DateTime @db.Date() @default(now())
-  expert Expert @relation(fields: [expertId], references: [id])
-  expertId String
-  queuecustomers QueueCustomer []
+  id             String          @id @default(uuid())
+  data           DateTime        @default(now()) @db.Date()
+  expert         Expert          @relation(fields: [expertId], references: [id])
+  expertId       String
+  queuecustomers QueueCustomer[]
 
   @@map("queues")
 }
 
-model QueueCustomer{
-id Int @id @default(autoincrement())
-queue Queue @relation(fields: [queueId], references: [id])
-queueId String    
-name String
-service String
-isWaiting Boolean @default(true)
+model QueueCustomer {
+  id        Int     @id @default(autoincrement())
+  queue     Queue   @relation(fields: [queueId], references: [id])
+  queueId   String
+  name      String
+  service   String
+  isWaiting Boolean @default(true)
 
   @@map("queue_customers")
 }
