@@ -21,6 +21,10 @@ export class QueuesService {
         },
         expertId,
       },
+      include: {
+        expert: true,
+        queuecustomers: true,
+      },
     });
   }
 
@@ -28,6 +32,7 @@ export class QueuesService {
     return await this.prisma.queue.findMany({
       include: {
         expert: true,
+        queuecustomers: true,
       },
     });
   }
@@ -38,7 +43,25 @@ export class QueuesService {
       },
       include: {
         expert: true,
+        queuecustomers: true,
       },
     });
+  }
+
+  async getQueueToday() {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const queueToday = await this.prisma.queue.findMany({
+      where: {
+        data: {
+          equals: today,
+        },
+      },
+      include: {
+        expert: true,
+        queuecustomers: true,
+      },
+    });
+    return queueToday;
   }
 }
