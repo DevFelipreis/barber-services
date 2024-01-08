@@ -4,7 +4,7 @@ import { QueuecustomersController } from './queuecustomers.controller';
 import { PrismaService } from 'src/database/prisma.service';
 
 @Module({
-  controllers: [QueuecustomersController],
-  providers: [QueuecustomersService, PrismaService],
+	controllers: [QueuecustomersController],
+	providers: [QueuecustomersService, PrismaService]
 })
 export class QueuecustomersModule {}

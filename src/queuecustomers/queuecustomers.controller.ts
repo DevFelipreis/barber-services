@@ -1,4 +1,4 @@
-import { Body, Controller, Post, Res } from '@nestjs/common';
+import { Body, Controller, NotFoundException, Param, Patch, Post, Res } from '@nestjs/common';
 import { QueuecustomersService } from './queuecustomers.service';
 import CreateQueuecustomersDto from './dto/create-queuecustomers';
 import { BadRequestException, HttpStatus } from '@nestjs/common';
@@ -27,4 +27,16 @@ export class QueuecustomersController {
 
 		return res.status(HttpStatus.CREATED).json({ customer });
 	}
+
+	@Patch(':id')
+async attendCustomer(@Res() res, @Param('id') id: string) {
+	const customer = await this.queuecustomersService.findCustomerById(+id);
+
+	if(!customer) {
+		throw new NotFoundException('O cliente informado não existe');
+	}
+
+	await this.queuecustomersService.attendCustomer(customer.id);
+	return res.status(HttpStatus.NO_CONTENT).send();
+}
 }
