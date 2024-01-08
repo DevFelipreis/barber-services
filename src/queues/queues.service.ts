@@ -69,5 +69,5 @@ export class QueuesService {
 					customer => customer.isWaiting
 				)
 		}});
-	}
+	}	
 }
