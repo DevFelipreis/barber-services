@@ -43,21 +43,21 @@ export class QueuecustomersService {
 			data: {
 				isWaiting: false
 			}
-		})
+		});
 	}
 
 	async findCustomerById(customerId: number) {
 		return await this.prisma.queueCustomer.findFirst({
-			where:{
+			where: {
 				id: customerId
 			}
-		})
+		});
 	}
 	async deleteCustomer(customerId: number) {
 		await this.prisma.queueCustomer.delete({
 			where: {
 				id: customerId
 			}
-		})
+		});
 	}
 }

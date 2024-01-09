@@ -68,6 +68,7 @@ export class QueuesService {
 				queuecustomers: queue.queuecustomers.filter(
 					customer => customer.isWaiting
 				)
-		}});
-	}	
+			};
+		});
+	}
 }

@@ -1,4 +1,13 @@
-import { Body, Controller, Delete, NotFoundException, Param, Patch, Post, Res } from '@nestjs/common';
+import {
+	Body,
+	Controller,
+	Delete,
+	NotFoundException,
+	Param,
+	Patch,
+	Post,
+	Res
+} from '@nestjs/common';
 import { QueuecustomersService } from './queuecustomers.service';
 import CreateQueuecustomersDto from './dto/create-queuecustomers';
 import { BadRequestException, HttpStatus } from '@nestjs/common';
@@ -29,26 +38,26 @@ export class QueuecustomersController {
 	}
 
 	@Patch(':id')
-async attendCustomer(@Res() res, @Param('id') id: string) {
-	const customer = await this.queuecustomersService.findCustomerById(+id);
+	async attendCustomer(@Res() res, @Param('id') id: string) {
+		const customer = await this.queuecustomersService.findCustomerById(+id);
 
-	if(!customer) {
-		throw new NotFoundException('O cliente informado não existe');
+		if (!customer) {
+			throw new NotFoundException('O cliente informado não existe');
+		}
+
+		await this.queuecustomersService.attendCustomer(customer.id);
+		return res.status(HttpStatus.NO_CONTENT).send();
 	}
 
-	await this.queuecustomersService.attendCustomer(customer.id);
-	return res.status(HttpStatus.NO_CONTENT).send();
-}
+	@Delete(':id')
+	async deleteCustomer(@Res() res, @Param('id') id: string) {
+		const customer = await this.queuecustomersService.findCustomerById(+id);
 
-@Delete(':id')
-async deleteCustomer(@Res() res, @Param('id') id: string) {
-	const customer = await this.queuecustomersService.findCustomerById(+id);
+		if (!customer) {
+			throw new NotFoundException('O cliente informado não existe');
+		}
 
-	if(!customer) {
-		throw new NotFoundException('O cliente informado não existe');
+		await this.queuecustomersService.deleteCustomer(customer.id);
+		return res.status(HttpStatus.NO_CONTENT).send();
 	}
-
-	await this.queuecustomersService.deleteCustomer(customer.id);
-	return res.status(HttpStatus.NO_CONTENT).send();
-}
 }
