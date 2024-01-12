@@ -25,4 +25,12 @@ export class UsersService {
 			}
 		});
 	}
+
+	async findUserById(id: string) {
+		return await this.prisma.user.findFirst({
+			where: {
+				id
+			}
+		});
+	}
 }
