@@ -1,1 +1,0 @@
-create database barber_services
